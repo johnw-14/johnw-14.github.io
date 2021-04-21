@@ -11,6 +11,7 @@ On most weekdays I work as a Data Specialist at STEMCELL Technologies in beautif
 Hopefully what I post here will be informative and thought-provoking. I guarantee the external links I post will be, at the very least. Any feedback is welcome. Thanks for reading!
 
 Cheers,
+
 John Wheler (he/him)
 
 
