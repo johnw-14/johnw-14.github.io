@@ -114,7 +114,9 @@ summary(raw_SSL_aov)
 
 We'll consider this at 95% significance. In other words, we are comfortable with a 5% probability of falsely rejecting the null hypothesis (a quick Google search can tell you much, much more about significance levels and p-values). This test gives a p-value of less than 2x10<sup>-16</sup>, which is very small indeed. This indicates strong statistical evidence for rejecting the null hypothesis in favour of the alternative hypothesis that at least one of the race code groups has a different mean raw SSL score from the others.
 
-But before we start parsing what that could mean, it is vital that we check the conditions for an ANOVA test. If any of these assumptions are violated, we cannot rely on the above result.
+I separately ran an ANOVA test (as well as the rest of the tests in this post) using the final SSL score rather than the raw one. Each test had nearly identical results. This makes sense given the fields' descriptions, where it looks like the final SSL score has just been normalized to a 500-point scale. Given how tightly the results match, I will outline further tests on the raw SSL score only.
+
+Before we start parsing what the ANOVA results could mean, it is vital that we check the conditions for an ANOVA test. If any of these assumptions are violated, we cannot rely on the above result.
 
 ------------------------------------------------------------------------
 

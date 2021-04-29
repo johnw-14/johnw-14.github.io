@@ -14,6 +14,7 @@ knitr::opts_chunk$set(fig.path = "images/")
 
 * * *
 
+
 ## Introduction
 
 Hello! If you're interested in a very introductory look at algorithmic bias, as well as some statistics in R, you are in the right place.
@@ -26,7 +27,9 @@ My focus here will be a few statistical tests of the Chicago PD SSL algorithm's 
 
 The dataset and more information is available here: https://data.cityofchicago.org/Public-Safety/Strategic-Subject-List-Historical/4aki-r3np
 
+
 * * *
+
 
 ## Load Packages in R
 
@@ -43,6 +46,7 @@ ChicagoPD_data <-
 
 
 * * *
+
 
 ## Initial Data Analysis
 
@@ -87,6 +91,7 @@ As one would probably expect, there appear to be some differences in distributio
 
 * * *
 
+
 ## Analysis of Variance (ANOVA)
 
 Let's run an ANOVA test on the raw SSL score first. Formally, our hypotheses would be:
@@ -102,10 +107,13 @@ summary(raw_SSL_aov)
 
 We'll consider this at 95% significance. In other words, we are comfortable with a 5% probability of falsely rejecting the null hypothesis (a quick Google search can tell you much, much more about significance levels and p-values). This test gives a p-value of less than 2x10^-16^, which is very small indeed. This indicates strong statistical evidence for rejecting the null hypothesis in favour of the alternative hypothesis that at least one of the race code groups has a different mean raw SSL score from the others.
 
-But before we start parsing what that could mean, it is vital that we check the conditions for an ANOVA test. If any of these assumptions are violated, we cannot rely on the above result.
+I separately ran an ANOVA test (as well as the rest of the tests in this post) using the final SSL score rather than the raw one. Each test had nearly identical results. This makes sense given the fields' descriptions, where it looks like the final SSL score has just been normalized to a 500-point scale. Given how tightly the results match, I will outline further tests on the raw SSL score only.
+
+Before we start parsing what the ANOVA results could mean, it is vital that we check the conditions for an ANOVA test. If any of these assumptions are violated, we cannot rely on the above result.
 
 
 * * *
+
 
 ## Check ANOVA Assumptions
 
@@ -127,7 +135,6 @@ mean(raw_SSL_aov_residuals)
 qqnorm(raw_SSL_aov_residuals, xlab = "Theoretical Quantiles", ylab = "Sample Quantiles")
 qqline(raw_SSL_aov_residuals)
 ```
-
 
 We see the histogram is a bit skewed, but not so much that it is an obvious problem. This also bears out in the normal probability plot, where we see deviation from normality (the straight line in this case) at the high end of the residual range. This matches the "squashed" right tail of the histogram. So all that considered, we would probably be safe considering the population distrbution to be near normal.
 
@@ -158,6 +165,7 @@ Given the issues with equal variance and independence, it looks like the conditi
 
 
 * * *
+
 
 ## Non-Parametric Alternative to ANOVA
 
@@ -201,6 +209,7 @@ The results appear to show many significant differences in SSL score distributio
 
 
 * * *
+
 
 ## Conclusion
 
