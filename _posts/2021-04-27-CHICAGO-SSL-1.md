@@ -80,13 +80,13 @@ Let's now look at some boxplots of how the raw SSL score and SSL score are distr
 boxplot(ChicagoPD_data$RAW.SSL.SCORE ~ ChicagoPD_data$RACE.CODE.CD)
 ```
 
-![](/images/unnamed-chunk-4-1.png)
+![](/images/rawSSL-raceCD-boxplot-1.png)
 
 ``` r
 boxplot(ChicagoPD_data$SSL.SCORE ~ ChicagoPD_data$RACE.CODE.CD)
 ```
 
-![](/images/unnamed-chunk-4-2.png)
+![](/images/SSL-raceCD-boxplot-1.png)
 
 As one would probably expect, there appear to be some differences in distributions by race code group when looking at both raw and final SSL values. One way to check if this is statistically significant is to run an analysis of variance (ANOVA) test.
 
@@ -134,7 +134,7 @@ raw_SSL_aov_residuals <- residuals(object = raw_SSL_aov)
 hist(x = raw_SSL_aov_residuals)
 ```
 
-![](/images/unnamed-chunk-6-1.png)
+![](/images/ANOVA-residuals-histogram-1.png)
 
 ``` r
 mean(raw_SSL_aov_residuals)
@@ -147,7 +147,7 @@ qqnorm(raw_SSL_aov_residuals, xlab = "Theoretical Quantiles", ylab = "Sample Qua
 qqline(raw_SSL_aov_residuals)
 ```
 
-![](/images/unnamed-chunk-6-2.png)
+![](/images/ANOVA-residuals-normplot-1.png)
 
 We see the histogram is a bit skewed, but not so much that it is an obvious problem. This also bears out in the normal probability plot, where we see deviation from normality (the straight line in this case) at the high end of the residual range. This matches the "squashed" right tail of the histogram. So all that considered, we would probably be safe considering the population distrbution to be near normal.
 
