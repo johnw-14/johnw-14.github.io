@@ -67,7 +67,7 @@ To map SSL scores by census tract, we're naturally going to need a map of census
 Now that we have our census tract shapefile, we can read it in from our documents. The dsn and layer are just the folder and file names on my computer, respectively.
 
 ```{r message = FALSE, warning = FALSE}
-tract <- readOGR(dsn="illinois_tracts_2016_17", layer = "cb_2016_17_tract_500k")
+tract <- readOGR(dsn="illinois_tracts_2016_17", layer = "cb_2016_17_tract_500k", verbose = FALSE)
 tract@data$TRACTCE <- as.character(tract@data$TRACTCE)
 ```
 

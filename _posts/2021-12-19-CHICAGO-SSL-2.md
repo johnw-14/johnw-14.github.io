@@ -83,16 +83,7 @@ documents. The dsn and layer are just the folder and file names on my
 computer, respectively.
 
 ``` r
-tract <- readOGR(dsn="illinois_tracts_2016_17", layer = "cb_2016_17_tract_500k")
-```
-
-    ## OGR data source with driver: ESRI Shapefile 
-    ## Source: "C:\Users\whele\Documents\johnw-14.github.io\docs\_posts\illinois_tracts_2016_17", layer: "cb_2016_17_tract_500k"
-    ## with 3121 features
-    ## It has 9 fields
-    ## Integer64 fields read as strings:  ALAND AWATER
-
-``` r
+tract <- readOGR(dsn="illinois_tracts_2016_17", layer = "cb_2016_17_tract_500k", verbose = FALSE)
 tract@data$TRACTCE <- as.character(tract@data$TRACTCE)
 ```
 
