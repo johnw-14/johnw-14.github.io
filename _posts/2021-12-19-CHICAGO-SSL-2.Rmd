@@ -66,7 +66,7 @@ To map SSL scores by census tract, we're naturally going to need a map of census
 
 Now that we have our census tract shapefile, we can read it in from our documents. The dsn and layer are just the folder and file names on my computer, respectively.
 
-```{r message = FALSE}
+```{r message = FALSE, warning = FALSE}
 tract <- readOGR(dsn="illinois_tracts_2016_17", layer = "cb_2016_17_tract_500k")
 tract@data$TRACTCE <- as.character(tract@data$TRACTCE)
 ```
@@ -143,6 +143,8 @@ df.polygon2 <- df.polygon2[!is.na(df.polygon2$count),]
 ```
 
 With that, we can now plot using leaflet. The popup information will show the user the GEOID, count of arrests and mean SSL when they click on a census tract in the map. The rest of the cosmetics follow Zev Ross's lead.
+
+(Side note: it took some work to properly publish the leaflet widgets from R markdown using Jekyll. [This post](https://jayrobwilliams.com/posts/2020/09/jekyll-html) was super helpful.)
 
 ```{r leaflet-SSL-map1}
 popup <- paste0("GEOID: ", df.polygon2$GEOID, "<br>", "Count of Arrests: ", df.polygon2$count, "<br>", "Mean SSL Score: ", round(df.polygon2$meanSSL))

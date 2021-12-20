@@ -197,6 +197,11 @@ show the user the GEOID, count of arrests and mean SSL when they click
 on a census tract in the map. The rest of the cosmetics follow Zev
 Ross’s lead.
 
+(Side note: it took some work to properly publish the leaflet widgets
+from R markdown using Jekyll. [This
+post](https://jayrobwilliams.com/posts/2020/09/jekyll-html) was super
+helpful.)
+
 ``` r
 popup <- paste0("GEOID: ", df.polygon2$GEOID, "<br>", "Count of Arrests: ", df.polygon2$count, "<br>", "Mean SSL Score: ", round(df.polygon2$meanSSL))
 pal <- colorNumeric(
@@ -219,7 +224,8 @@ map2<-leaflet() %>%
             title = "Mean SSL Score") %>%
   saveWidget(here::here("html", "leaflet-SSL-map1.html"))
 ```
-<iframe src="/html/leaflet-SSL-map1.html" height="600px" width="100%" style="border:none;"></iframe>
+
+<iframe src="html/leaflet-SSL-map1.html" height="600px" width="100%" style="border:none;"></iframe>
 
 Much, much nicer than the ggplot version above. The proportions are
 right, there’s a reference map underneath, popup information, and you
@@ -255,7 +261,8 @@ map3 <- leaflet() %>%
             title = "Count of Arrests") %>%
   saveWidget(here::here("html", "leaflet-SSL-map2.html"))
 ```
-<iframe src="/html/leaflet-SSL-map2.html" height="600px" width="100%" style="border:none;"></iframe>
+
+<iframe src="html/leaflet-SSL-map2.html" height="600px" width="100%" style="border:none;"></iframe>
 
 Here we see a few areas of the city immediately jump out. This obviously
 leads into a much broader discussion about which areas of the city see
