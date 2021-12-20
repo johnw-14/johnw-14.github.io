@@ -216,7 +216,7 @@ map2<-leaflet() %>%
   saveWidget(here::here("html", "leaflet-SSL-map1.html"))
 ```
 
-<iframe src="html/leaflet-SSL-map1.html" height="600px" width="100%" style="border:none;"></iframe>
+<iframe src="/html/leaflet-SSL-map1.html" height="600px" width="100%" style="border:none;"></iframe>
 
 Much, much nicer than the ggplot version above. The proportions are
 right, there’s a reference map underneath, popup information, and you
@@ -253,7 +253,7 @@ map3 <- leaflet() %>%
   saveWidget(here::here("html", "leaflet-SSL-map2.html"))
 ```
 
-<iframe src="html/leaflet-SSL-map2.html" height="600px" width="100%" style="border:none;"></iframe>
+<iframe src="/html/leaflet-SSL-map2.html" height="600px" width="100%" style="border:none;"></iframe>
 
 Here we see a few areas of the city immediately jump out. This obviously
 leads into a much broader discussion about which areas of the city see
