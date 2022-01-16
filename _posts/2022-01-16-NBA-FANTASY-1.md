@@ -142,20 +142,6 @@ Hashtag_proj <- Hashtag_proj %>%
   mutate_all(funs(str_replace(., "\n", "#")))
 ```
 
-    ## Warning: `funs()` was deprecated in dplyr 0.8.0.
-    ## Please use a list of either functions or lambdas: 
-    ## 
-    ##   # Simple named list: 
-    ##   list(mean = mean, median = median)
-    ## 
-    ##   # Auto named with `tibble::lst()`: 
-    ##   tibble::lst(mean, median)
-    ## 
-    ##   # Using lambdas
-    ##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
-
 The rankings table separated the values and z-scores with a space, so no
 replacement was needed there.
 
@@ -240,32 +226,24 @@ future calculations. I used summarise and across to see the count of NA
 values in each
 
 ``` r
-Hashtag_rank %>%
+rank_count_NA <- Hashtag_rank %>%
   summarise(across(everything(), ~ sum(is.na(.))))
+kable(rank_count_NA)
 ```
 
-    ## # A tibble: 1 x 29
-    ##    RANK PLAYER   POS  TEAM    GP   MPG `FG%`   FGM   FGA `zFG%` `FT%`   FTM
-    ##   <int>  <int> <int> <int> <int> <int> <int> <int> <int>  <int> <int> <int>
-    ## 1     0      0     0     1     0     0     0     0     0      0     0     0
-    ## # ... with 17 more variables: FTA <int>, zFT% <int>, 3PTM <int>, z3PTM <int>,
-    ## #   PTS <int>, zPTS <int>, TREB <int>, zTREB <int>, AST <int>, zAST <int>,
-    ## #   STL <int>, zSTL <int>, BLK <int>, zBLK <int>, TO <int>, zTO <int>,
-    ## #   TOTAL <int>
+| RANK | PLAYER | POS | TEAM |  GP | MPG | FG% | FGM | FGA | zFG% | FT% | FTM | FTA | zFT% | 3PTM | z3PTM | PTS | zPTS | TREB | zTREB | AST | zAST | STL | zSTL | BLK | zBLK |  TO | zTO | TOTAL |
+|-----:|-------:|----:|-----:|----:|----:|----:|----:|----:|-----:|----:|----:|----:|-----:|-----:|------:|----:|-----:|-----:|------:|----:|-----:|----:|-----:|----:|-----:|----:|----:|------:|
+|    0 |      0 |   0 |    1 |   0 |   0 |   0 |   0 |   0 |    0 |   0 |   0 |   0 |    0 |    0 |     0 |   0 |    0 |    0 |     0 |   0 |    0 |   0 |    0 |   0 |    0 |   0 |   0 |     0 |
 
 ``` r
-Hashtag_proj %>%
+proj_count_NA <- Hashtag_proj %>%
   summarise(across(everything(), ~ sum(is.na(.))))
+kable(proj_count_NA)
 ```
 
-    ## # A tibble: 1 x 29
-    ##    RANK PLAYER   POS  TEAM    GP   MPG `FG%`   FGM   FGA `zFG%` `FT%`   FTM
-    ##   <int>  <int> <int> <int> <int> <int> <int> <int> <int>  <int> <int> <int>
-    ## 1     0      0     0     0     0     0     0     0     0      0     0     0
-    ## # ... with 17 more variables: FTA <int>, zFT% <int>, 3PTM <int>, z3PTM <int>,
-    ## #   PTS <int>, zPTS <int>, TREB <int>, zTREB <int>, AST <int>, zAST <int>,
-    ## #   STL <int>, zSTL <int>, BLK <int>, zBLK <int>, TO <int>, zTO <int>,
-    ## #   TOTAL <int>
+| RANK | PLAYER | POS | TEAM |  GP | MPG | FG% | FGM | FGA | zFG% | FT% | FTM | FTA | zFT% | 3PTM | z3PTM | PTS | zPTS | TREB | zTREB | AST | zAST | STL | zSTL | BLK | zBLK |  TO | zTO | TOTAL |
+|-----:|-------:|----:|-----:|----:|----:|----:|----:|----:|-----:|----:|----:|----:|-----:|-----:|------:|----:|-----:|-----:|------:|----:|-----:|----:|-----:|----:|-----:|----:|----:|------:|
+|    0 |      0 |   0 |    0 |   0 |   0 |   0 |   0 |   0 |    0 |   0 |   0 |   0 |    0 |    0 |     0 |   0 |    0 |    0 |     0 |   0 |    0 |   0 |    0 |   0 |    0 |   0 |   0 |     0 |
 
 The only NA is in the TEAM column of the rank table, which shouldn’t be
 an issue for analysis.
@@ -278,17 +256,12 @@ NA.
 ``` r
 Hashtag_rank_NA <- Hashtag_rank %>%
   filter(if_any(everything(), ~ is.na(.x)))
-Hashtag_rank_NA
+kable(Hashtag_rank_NA)
 ```
 
-    ## # A tibble: 1 x 29
-    ##   RANK  PLAYER      POS   TEAM  GP    MPG   `FG%`   FGM   FGA `zFG%` `FT%`   FTM
-    ##   <chr> <chr>       <chr> <chr> <chr> <chr> <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl>
-    ## 1 456   Tim Frazier PG,SG <NA>  10    20    0.302   1.3   4.3  -1.44 0.556   0.5
-    ## # ... with 17 more variables: FTA <dbl>, zFT% <dbl>, 3PTM <dbl>, z3PTM <dbl>,
-    ## #   PTS <dbl>, zPTS <dbl>, TREB <dbl>, zTREB <dbl>, AST <dbl>, zAST <dbl>,
-    ## #   STL <dbl>, zSTL <dbl>, BLK <dbl>, zBLK <dbl>, TO <dbl>, zTO <dbl>,
-    ## #   TOTAL <chr>
+| RANK | PLAYER      | POS   | TEAM | GP  | MPG |   FG% | FGM | FGA |  zFG% |   FT% | FTM | FTA | zFT% | 3PTM | z3PTM | PTS |  zPTS | TREB | zTREB | AST | zAST | STL |  zSTL | BLK |  zBLK |  TO |  zTO | TOTAL |
+|:-----|:------------|:------|:-----|:----|:----|------:|----:|----:|------:|------:|----:|----:|-----:|-----:|------:|----:|------:|-----:|------:|----:|-----:|----:|------:|----:|------:|----:|-----:|:------|
+| 456  | Tim Frazier | PG,SG | NA   | 10  | 20  | 0.302 | 1.3 | 4.3 | -1.44 | 0.556 | 0.5 | 0.9 | -1.1 |  0.6 | -1.15 | 3.7 | -1.39 |  1.9 |  -1.2 | 3.3 | 0.45 | 0.3 | -1.16 | 0.1 | -0.97 | 1.3 | 0.12 | -7.93 |
 
 Tim Frazier was recently released by the Philadelphia 76ers, hence the
 NA.
@@ -313,7 +286,10 @@ name. I did an outer join so I can keep track of any players that are
 only in one table.
 
 ``` r
-Hashtag_merge <- merge(Hashtag_rank, Hashtag_proj, by = "PLAYER", all = TRUE, suffixes = c(".r", ".p"))
+Hashtag_merge <- merge(Hashtag_rank, Hashtag_proj, 
+                       by = "PLAYER", 
+                       all = TRUE, 
+                       suffixes = c(".r", ".p"))
 ```
 
 From there, the first thing I want to look at is the difference in
@@ -346,35 +322,36 @@ Top25 <- Hashtag_merge %>%
   select(PLAYER, POS.r, TEAM.r, TOTAL.diff, RANK.p, MPG.r, MPG.p) %>%
   filter(RANK.p < 150) %>%
   slice_max(TOTAL.diff, n = 25)
-Top25
+kable(Top25)
 ```
 
-    ##                PLAYER    POS.r TEAM.r TOTAL.diff RANK.p MPG.r MPG.p
-    ## 1       Thomas Bryant        C    WAS       8.78    142  11.7  25.2
-    ## 2  Michael Porter Jr.    SF,PF    DEN       3.75    125  29.8  30.0
-    ## 3        Clint Capela        C    ATL       2.75     46  29.8  29.5
-    ## 4     Anfernee Simons    PG,SG    POR       2.65     66  26.4  30.3
-    ## 5         Jalen Suggs    PG,SG    ORL       2.47    147  27.4  29.2
-    ## 6    Kevin Porter Jr. PG,SG,SF    HOU       2.40    130  29.8  31.1
-    ## 7        Kyrie Irving    PG,SG    BRO       2.33     18  32.1  33.1
-    ## 8        Nikola Jokic     PF,C    DEN       2.10      1  32.6  34.1
-    ## 9       Stephen Curry    PG,SG    GSW       2.02      3  34.6  34.0
-    ## 10       James Harden    PG,SG    BRO       1.91      2  37.0  35.8
-    ## 11      Fred VanVleet    PG,SG    TOR       1.89      6  38.0  37.8
-    ## 12     Alperen Sengun        C    HOU       1.89    117  18.3  21.2
-    ## 13       Bradley Beal    SG,SF    WAS       1.88     21  36.1  35.6
-    ## 14      Klay Thompson    SG,SF    GSW       1.74    106  20.0  26.8
-    ## 15        Luka Doncic    PG,SG    DAL       1.63     19  34.6  34.1
-    ## 16      Pascal Siakam     PF,C    TOR       1.61     36  36.1  36.5
-    ## 17     Damian Lillard       PG    POR       1.47     15  36.5  32.8
-    ## 18       Kelly Olynyk     PF,C    DET       1.45    120  23.1  27.2
-    ## 19       Monte Morris    PG,SG    DEN       1.44    105  29.6  30.4
-    ## 20       Jakob Poeltl        C    SAS       1.43     89  28.7  31.3
-    ## 21     Scottie Barnes    SF,PF    TOR       1.41     52  35.5  35.9
-    ## 22  Russell Westbrook       PG    LAL       1.40     74  35.3  34.1
-    ## 23  Jaren Jackson Jr.     PF,C    MEM       1.38     27  27.6  29.4
-    ## 24     Reggie Jackson    PG,SG    LAC       1.28    128  31.4  32.2
-    ## 25  Jarred Vanderbilt     PF,C    MIN       1.21     68  25.8  28.8
+| PLAYER             | POS.r    | TEAM.r | TOTAL.diff | RANK.p | MPG.r | MPG.p |
+|:-------------------|:---------|:-------|-----------:|-------:|------:|------:|
+| Thomas Bryant      | C        | WAS    |       8.78 |    142 |  11.7 |  25.2 |
+| Michael Porter Jr. | SF,PF    | DEN    |       3.75 |    125 |  29.8 |  30.0 |
+| Clint Capela       | C        | ATL    |       2.75 |     46 |  29.8 |  29.5 |
+| Anfernee Simons    | PG,SG    | POR    |       2.65 |     66 |  26.4 |  30.3 |
+| Jalen Suggs        | PG,SG    | ORL    |       2.47 |    147 |  27.4 |  29.2 |
+| Kevin Porter Jr.   | PG,SG,SF | HOU    |       2.40 |    130 |  29.8 |  31.1 |
+| Kyrie Irving       | PG,SG    | BRO    |       2.33 |     18 |  32.1 |  33.1 |
+| Nikola Jokic       | PF,C     | DEN    |       2.10 |      1 |  32.6 |  34.1 |
+| Stephen Curry      | PG,SG    | GSW    |       2.02 |      3 |  34.6 |  34.0 |
+| James Harden       | PG,SG    | BRO    |       1.91 |      2 |  37.0 |  35.8 |
+| Fred VanVleet      | PG,SG    | TOR    |       1.89 |      6 |  38.0 |  37.8 |
+| Alperen Sengun     | C        | HOU    |       1.89 |    117 |  18.3 |  21.2 |
+| Bradley Beal       | SG,SF    | WAS    |       1.88 |     21 |  36.1 |  35.6 |
+| Klay Thompson      | SG,SF    | GSW    |       1.74 |    106 |  20.0 |  26.8 |
+| Luka Doncic        | PG,SG    | DAL    |       1.63 |     19 |  34.6 |  34.1 |
+| Pascal Siakam      | PF,C     | TOR    |       1.61 |     36 |  36.1 |  36.5 |
+| Damian Lillard     | PG       | POR    |       1.47 |     15 |  36.5 |  32.8 |
+| Kelly Olynyk       | PF,C     | DET    |       1.45 |    120 |  23.1 |  27.2 |
+| Monte Morris       | PG,SG    | DEN    |       1.44 |    105 |  29.6 |  30.4 |
+| Jakob Poeltl       | C        | SAS    |       1.43 |     89 |  28.7 |  31.3 |
+| Scottie Barnes     | SF,PF    | TOR    |       1.41 |     52 |  35.5 |  35.9 |
+| Russell Westbrook  | PG       | LAL    |       1.40 |     74 |  35.3 |  34.1 |
+| Jaren Jackson Jr.  | PF,C     | MEM    |       1.38 |     27 |  27.6 |  29.4 |
+| Reggie Jackson     | PG,SG    | LAC    |       1.28 |    128 |  31.4 |  32.2 |
+| Jarred Vanderbilt  | PF,C     | MIN    |       1.21 |     68 |  25.8 |  28.8 |
 
 And now let’s do the same for the bottom 25, using slice\_min.
 
@@ -419,5 +396,3 @@ fantasy basketball managers out there can draw their own conclusions (or
 bug me for the underlying data). Whether you’re into fantasy sports or
 not, I hope there were some helpful Nuggets in the data cleaning and
 results (pun absolutely intended).
-
-------------------------------------------------------------------------
