@@ -72,26 +72,6 @@ library(tidyverse)
 library(knitr)
 ```
 
-    ## Rows: 430 Columns: 16
-
-    ## -- Column specification --------------------------------------------------------
-    ## Delimiter: ","
-    ## chr (16): R#, PLAYER, POS, TEAM, GP, MPG, FG%, FT%, 3:00 PM, PTS, TREB, AST,...
-
-    ## 
-    ## i Use `spec()` to retrieve the full column specification for this data.
-    ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-    ## Rows: 601 Columns: 16
-
-    ## -- Column specification --------------------------------------------------------
-    ## Delimiter: ","
-    ## chr (16): R#, PLAYER, POS, TEAM, GP, MPG, FG%, FT%, 3:00 PM, PTS, TREB, AST,...
-
-    ## 
-    ## i Use `spec()` to retrieve the full column specification for this data.
-    ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
 ------------------------------------------------------------------------
 
 ## Data Load and Cleaning
@@ -228,22 +208,22 @@ values in each
 ``` r
 rank_count_NA <- Hashtag_rank %>%
   summarise(across(everything(), ~ sum(is.na(.))))
-kable(rank_count_NA)
+kable(select(rank_count_NA, c(1:6)))
 ```
 
-| RANK | PLAYER | POS | TEAM |  GP | MPG | FG% | FGM | FGA | zFG% | FT% | FTM | FTA | zFT% | 3PTM | z3PTM | PTS | zPTS | TREB | zTREB | AST | zAST | STL | zSTL | BLK | zBLK |  TO | zTO | TOTAL |
-|-----:|-------:|----:|-----:|----:|----:|----:|----:|----:|-----:|----:|----:|----:|-----:|-----:|------:|----:|-----:|-----:|------:|----:|-----:|----:|-----:|----:|-----:|----:|----:|------:|
-|    0 |      0 |   0 |    1 |   0 |   0 |   0 |   0 |   0 |    0 |   0 |   0 |   0 |    0 |    0 |     0 |   0 |    0 |    0 |     0 |   0 |    0 |   0 |    0 |   0 |    0 |   0 |   0 |     0 |
+| RANK | PLAYER | POS | TEAM |  GP | MPG |
+|-----:|-------:|----:|-----:|----:|----:|
+|    0 |      0 |   0 |    1 |   0 |   0 |
 
 ``` r
 proj_count_NA <- Hashtag_proj %>%
   summarise(across(everything(), ~ sum(is.na(.))))
-kable(proj_count_NA)
+kable(select(proj_count_NA, c(1:6)))
 ```
 
-| RANK | PLAYER | POS | TEAM |  GP | MPG | FG% | FGM | FGA | zFG% | FT% | FTM | FTA | zFT% | 3PTM | z3PTM | PTS | zPTS | TREB | zTREB | AST | zAST | STL | zSTL | BLK | zBLK |  TO | zTO | TOTAL |
-|-----:|-------:|----:|-----:|----:|----:|----:|----:|----:|-----:|----:|----:|----:|-----:|-----:|------:|----:|-----:|-----:|------:|----:|-----:|----:|-----:|----:|-----:|----:|----:|------:|
-|    0 |      0 |   0 |    0 |   0 |   0 |   0 |   0 |   0 |    0 |   0 |   0 |   0 |    0 |    0 |     0 |   0 |    0 |    0 |     0 |   0 |    0 |   0 |    0 |   0 |    0 |   0 |   0 |     0 |
+| RANK | PLAYER | POS | TEAM |  GP | MPG |
+|-----:|-------:|----:|-----:|----:|----:|
+|    0 |      0 |   0 |    0 |   0 |   0 |
 
 The only NA is in the TEAM column of the rank table, which shouldn’t be
 an issue for analysis.
@@ -256,12 +236,12 @@ NA.
 ``` r
 Hashtag_rank_NA <- Hashtag_rank %>%
   filter(if_any(everything(), ~ is.na(.x)))
-kable(Hashtag_rank_NA)
+kable(select(Hashtag_rank_NA, c(1:6)))
 ```
 
-| RANK | PLAYER      | POS   | TEAM | GP  | MPG |   FG% | FGM | FGA |  zFG% |   FT% | FTM | FTA | zFT% | 3PTM | z3PTM | PTS |  zPTS | TREB | zTREB | AST | zAST | STL |  zSTL | BLK |  zBLK |  TO |  zTO | TOTAL |
-|:-----|:------------|:------|:-----|:----|:----|------:|----:|----:|------:|------:|----:|----:|-----:|-----:|------:|----:|------:|-----:|------:|----:|-----:|----:|------:|----:|------:|----:|-----:|:------|
-| 456  | Tim Frazier | PG,SG | NA   | 10  | 20  | 0.302 | 1.3 | 4.3 | -1.44 | 0.556 | 0.5 | 0.9 | -1.1 |  0.6 | -1.15 | 3.7 | -1.39 |  1.9 |  -1.2 | 3.3 | 0.45 | 0.3 | -1.16 | 0.1 | -0.97 | 1.3 | 0.12 | -7.93 |
+| RANK | PLAYER      | POS   | TEAM | GP  | MPG |
+|:-----|:------------|:------|:-----|:----|:----|
+| 456  | Tim Frazier | PG,SG | NA   | 10  | 20  |
 
 Tim Frazier was recently released by the Philadelphia 76ers, hence the
 NA.
