@@ -13092,6 +13092,14 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Bears,-Bots,-Biased-Training-Data">Bears, Bots, Biased Training Data<a class="anchor-link" href="#Bears,-Bots,-Biased-Training-Data">&#182;</a></h1><p>Feb 24, 2022</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>I recently started fast.ai's free <a href="https://course.fast.ai/">Practical Deep Learning for Coders course</a>. I have really enjoyed the first couple lessons. I always thought I needed to build up more programming skills before starting with machine learning. The course has a very different approach. They emphasize getting up and running, and filling in the detailed bits later. Their analogy (borrowed from Harvard professor David Perkins) is if you are going to teach someone to play baseball, you take them to a game. You don't start with the physics of the ball travelling through the air. It is a lot more interesting to learn the tricky bits when you have context for why you need them.</p>
 <p>One of the early lessons focuses on training a model to classify images of bears. I want to extend that out for a couple reasons:</p>
 <ol>
@@ -13168,7 +13176,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AZURE_SEARCH_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;cd8ba64cfd5441598c7104551564c34a&#39;</span><span class="p">)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AZURE_SEARCH_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;HIDDEN&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13445,10 +13453,10 @@ div#notebook {
 
  
  
-<div id="5bcdfcf2-9680-4532-ab0b-b994e0e93757"></div>
+<div id="269db46d-2e97-4047-b66f-d6c750d25343"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#5bcdfcf2-9680-4532-ab0b-b994e0e93757');
+var element = $('#269db46d-2e97-4047-b66f-d6c750d25343');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "352936c0b7ab41bc918a8bf91599428d", "version_major": 2, "version_minor": 0}
@@ -13764,18 +13772,6 @@ var element = $('#5bcdfcf2-9680-4532-ab0b-b994e0e93757');
 
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/opt/conda/lib/python3.7/site-packages/PIL/TiffImagePlugin.py:819: UserWarning: Corrupt EXIF data.  Expecting to read 4 bytes but only got 2. 
-  warnings.warn(str(msg))
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
     <div class="prompt output_prompt">Out[18]:</div>
 
 
@@ -13920,18 +13916,6 @@ var element = $('#5bcdfcf2-9680-4532-ab0b-b994e0e93757');
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/opt/conda/lib/python3.7/site-packages/PIL/TiffImagePlugin.py:819: UserWarning: Corrupt EXIF data.  Expecting to read 4 bytes but only got 2. 
-  warnings.warn(str(msg))
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
 
 <div class="output_html rendered_html output_subarea ">
 <table border="1" class="dataframe">
@@ -13979,28 +13963,6 @@ var element = $('#5bcdfcf2-9680-4532-ab0b-b994e0e93757');
 
 </div>
 
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/opt/conda/lib/python3.7/site-packages/PIL/TiffImagePlugin.py:819: UserWarning: Corrupt EXIF data.  Expecting to read 4 bytes but only got 2. 
-  warnings.warn(str(msg))
-/opt/conda/lib/python3.7/site-packages/PIL/TiffImagePlugin.py:819: UserWarning: Corrupt EXIF data.  Expecting to read 4 bytes but only got 2. 
-  warnings.warn(str(msg))
-/opt/conda/lib/python3.7/site-packages/PIL/TiffImagePlugin.py:819: UserWarning: Corrupt EXIF data.  Expecting to read 4 bytes but only got 2. 
-  warnings.warn(str(msg))
-/opt/conda/lib/python3.7/site-packages/PIL/TiffImagePlugin.py:819: UserWarning: Corrupt EXIF data.  Expecting to read 4 bytes but only got 2. 
-  warnings.warn(str(msg))
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
